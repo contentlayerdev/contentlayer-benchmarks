@@ -1,0 +1,13 @@
+{
+  "name": "contentlayer-benchmark-run-builds",
+  "version": "0.0.1",
+  "scripts": {
+    "run-builds": "ts-node index.ts"
+  },
+  "dependencies": {
+    "@types/cli-table": "^0.3.0",
+    "cli-table": "^0.3.11",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
+  }
+}

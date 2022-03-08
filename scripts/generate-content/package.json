@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "index.ts",
   "scripts": {
-    "build": "ts-node index.ts"
+    "generate-content": "ts-node index.ts"
   },
   "dependencies": {
     "glob": "^7.2.0",
