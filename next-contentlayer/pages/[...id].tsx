@@ -1,30 +1,26 @@
 import Head from "next/head";
 import type { FC } from "react";
 
-import { allDocuments } from "contentlayer/generated";
-import type { DocumentTypes } from "contentlayer/generated";
+import { allPages } from "contentlayer/generated";
+import type { Page } from "contentlayer/generated";
 
 export const getStaticPaths = () => {
-  const paths = allDocuments.map((_) => `/${_._raw.flattenedPath}`);
-
+  const paths = allPages.map((page) => page.url);
   return { paths, fallback: false };
 };
 
-export const getStaticProps = (context: any) => {
-  const doc = allDocuments.find(
-    (_) => _._raw.flattenedPath === context.params.id.join("/")
-  );
-
-  return { props: { doc } };
+export const getStaticProps = ({ params }) => {
+  const page = allPages.find((page) => page.url === params.id.join("/"));
+  return { props: { page } };
 };
 
-const Page: FC<{ doc: DocumentTypes }> = ({ doc }) => (
+const Page: FC<{ page: Page }> = ({ page }) => (
   <>
     <Head>
-      <title>{doc.title}</title>
+      <title>{page.title}</title>
     </Head>
-    <h1>{doc.title}</h1>
-    <div dangerouslySetInnerHTML={{ __html: doc.body.html }} />
+    <h1>{page.title}</h1>
+    <div dangerouslySetInnerHTML={{ __html: page.body.html }} />
   </>
 );
 

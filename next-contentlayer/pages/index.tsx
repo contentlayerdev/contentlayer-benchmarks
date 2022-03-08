@@ -1,22 +1,17 @@
-import type { InferGetStaticPropsType } from "next";
 import type { FC } from "react";
 
-import { allDocuments } from "contentlayer/generated";
+import { allPages } from "contentlayer/generated";
+import type { Page } from "contentlayer/generated";
 
 export const getStaticProps = () => {
-  const docs = allDocuments.map((_) => ({
-    path: _._raw.flattenedPath,
-    title: _.title,
-  }));
-
-  return { props: { docs } };
+  return { props: { pages: allPages } };
 };
 
-const Page: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ docs }) => (
+const Page: FC<{ pages: Page[] }> = ({ pages }) => (
   <div>
-    {docs.map((doc) => (
-      <a style={{ display: "block" }} key={doc.path} href={`/${doc.path}`}>
-        {doc.title}
+    {pages.map((page) => (
+      <a style={{ display: "block" }} key={page.url} href={page.url}>
+        {page.title}
       </a>
     ))}
   </div>
