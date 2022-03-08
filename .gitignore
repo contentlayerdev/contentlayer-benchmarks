@@ -1,0 +1,8 @@
+# Dependencies
+node_modules
+
+# Contenlayer
+.contentlayer
+
+# Generated markdown files
+content/*.md
