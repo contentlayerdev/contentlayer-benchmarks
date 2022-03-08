@@ -4,6 +4,7 @@
   "workspaces": [
     "gatsby",
     "next-contentlayer",
-    "next-remark"
+    "next-remark",
+    "scripts/*"
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "name": "contentlayer-benchmark-generate-content",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "scripts": {
+    "build": "ts-node index.ts"
+  },
+  "dependencies": {
+    "glob": "^7.2.0",
+    "lorem-ipsum": "^2.0.4",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
+  }
+}
