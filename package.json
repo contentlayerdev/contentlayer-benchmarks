@@ -2,6 +2,7 @@
   "private": true,
   "name": "contentlayer-benchmark-gatsby-docs",
   "workspaces": [
-    "next-contentlayer"
+    "next-contentlayer",
+    "next-remark"
   ]
 }

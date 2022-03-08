@@ -1,0 +1,29 @@
+{
+  "name": "contentlayer-benchmark-next-remark",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "glob": "^7.2.0",
+    "gray-matter": "^4.0.3",
+    "next": "^12.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rehype-sanitize": "^5.0.1",
+    "rehype-stringify": "^9.0.3",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
+    "unified": "^10.1.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.21",
+    "@types/react-dom": "^17.0.9",
+    "eslint-config-next": "^12.0.10",
+    "next-contentlayer": "^0.1.2",
+    "typescript": "^4.5.5"
+  }
+}
