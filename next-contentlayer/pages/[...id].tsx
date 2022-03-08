@@ -10,7 +10,8 @@ export const getStaticPaths = () => {
 };
 
 export const getStaticProps = ({ params }) => {
-  const page = allPages.find((page) => page.url === params.id.join("/"));
+  const currentPath = `/${params.id.join("/")}`;
+  const page = allPages.find((page) => page.url === currentPath);
   return { props: { page } };
 };
 
