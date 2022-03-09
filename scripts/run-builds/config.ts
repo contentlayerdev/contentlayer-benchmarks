@@ -18,7 +18,7 @@ export function testsConfig(rootDir: string): TestConfig {
     {
       name: "Next.js + Remark",
       path: path.join(rootDir, "next-remark"),
-      cache: [".next", ".content-cache.json"],
+      cache: [".next"],
     },
     {
       name: "Gatsby",

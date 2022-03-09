@@ -2,18 +2,15 @@ import Head from "next/head";
 import type { FC } from "react";
 
 import type { Page } from "../types/Page";
-import contentCache from "../.content-cache.json";
+import { pageByUrlPath, allPagePaths } from "../utils/page-utils";
 
-const allPages = contentCache as Page[];
-
-export const getStaticPaths = () => {
-  const paths = allPages.map((page) => page.__metadata.urlPath);
+export const getStaticPaths = async () => {
+  const paths = await allPagePaths();
   return { paths, fallback: false };
 };
 
-export const getStaticProps = ({ params }) => {
-  const currentPath = `/${params.id.join("/")}`;
-  const page = allPages.find((page) => page.__metadata.urlPath === currentPath);
+export const getStaticProps = async ({ params }) => {
+  const page = await pageByUrlPath(`/${params.id.join("/")}`);
   return { props: { page } };
 };
 

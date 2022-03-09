@@ -1,12 +1,12 @@
 import type { FC } from "react";
 
 import type { Page } from "../types/Page";
-import contentCache from "../.content-cache.json";
 
-const allPages = contentCache as Page[];
+import { allPages } from "../utils/page-utils";
 
-export const getStaticProps = () => {
-  return { props: { pages: allPages } };
+export const getStaticProps = async () => {
+  const pages = await allPages();
+  return { props: { pages } };
 };
 
 const Page: FC<{ pages: Page[] }> = ({ pages }) => (
