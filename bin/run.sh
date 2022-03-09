@@ -4,11 +4,11 @@
 yarn install
 
 # Generate content
-pushd scripts/generate-content
+cd scripts/generate-content
 npm run generate-content
-popd
+cd -
 
 # Run builds
-pushd scripts/run-builds
+cd scripts/run-builds
 npm run run-builds
 
