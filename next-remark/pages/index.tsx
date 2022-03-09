@@ -12,10 +12,7 @@ export const getStaticProps = async () => {
 const Page: FC<{ pages: Page[] }> = ({ pages }) => (
   <div>
     {pages.map((page) => (
-      <a
-        style={{ display: "block" }}
-        key={page.__metadata.urlPath}
-        href={page.__metadata.urlPath}>
+      <a style={{ display: "block" }} key={page.urlPath} href={page.urlPath}>
         {page.title}
       </a>
     ))}

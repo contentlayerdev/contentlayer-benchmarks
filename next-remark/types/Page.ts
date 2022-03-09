@@ -1,15 +1,11 @@
-export type PageMetadata = {
-  relFilePath: string;
-  urlPath: string;
-};
-
-export type ParsedMarkdown = {
-  raw: string;
-  html: string;
-};
-
-export type Page = {
+export type PageFrontmatter = {
   title: string;
-  __metadata: PageMetadata;
-  body: ParsedMarkdown;
+};
+
+export type Page = PageFrontmatter & {
+  urlPath: string;
+  body: {
+    raw: string;
+    html: string;
+  };
 };

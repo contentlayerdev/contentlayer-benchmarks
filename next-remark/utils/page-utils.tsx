@@ -9,51 +9,98 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 
-import type { Page } from "../types/Page";
+import type { Page, PageFrontmatter } from "../types/Page";
 
+const contentDir = path.join(process.cwd(), "../content");
+
+/**
+ * Full paths to all content source files.
+ *
+ * @returns an array of all content source files
+ */
+function allPageFilePaths(): string[] {
+  return glob.sync(path.join(contentDir, "**/*.md"));
+}
+
+/**
+ * Given the full path to a content source file, provide a relative path from
+ * the content source directory, without the file extension.
+ *
+ * @param filePath Full path to the content source file
+ * @returns Path that can be used as a urlPath for this piece of content
+ */
+function buildPageUrlPath(filePath: string): string {
+  const relFilePath = filePath.replace(contentDir, "");
+  return relFilePath.replace(/\.md$/, "");
+}
+
+/**
+ * Read from a local file and convert it into a Page object.
+ *
+ * @param filePath Full path to the content source file
+ * @returns processed Page object
+ */
+async function processPage(filePath: string): Promise<Page> {
+  const rawContent = fs.readFileSync(filePath).toString();
+
+  const { data, content } = matter(rawContent);
+  const frontmatter = data as PageFrontmatter;
+
+  const body = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeSanitize)
+    .use(rehypeStringify)
+    .process(content);
+
+  const urlPath = buildPageUrlPath(filePath);
+
+  return {
+    ...frontmatter,
+    urlPath,
+    body: {
+      raw: content,
+      html: String(body),
+    },
+  };
+}
+
+/**
+ * Process and rerturn all pages.
+ *
+ * @returns A list of all Page objects
+ */
 export async function allPages(): Promise<Page[]> {
-  const contentDir = path.join(process.cwd(), "../content");
-  const contentFilePaths = glob.sync(path.join(contentDir, "**/*.md"));
-
   let pages = [];
-
-  for (const filePath of contentFilePaths) {
-    const rawContent = fs.readFileSync(filePath).toString();
-
-    const { data, content } = matter(rawContent);
-
-    const body = await unified()
-      .use(remarkParse)
-      .use(remarkRehype)
-      .use(rehypeSanitize)
-      .use(rehypeStringify)
-      .process(content);
-
-    const relFilePath = filePath.replace(contentDir, "");
-    const urlPath = relFilePath.replace(/\.md$/, "");
-
-    pages.push({
-      ...data,
-      __metadata: {
-        relFilePath,
-        urlPath,
-      },
-      body: {
-        raw: content,
-        html: String(body),
-      },
-    });
+  for (const filePath of allPageFilePaths()) {
+    const page = await processPage(filePath);
+    pages.push(page);
   }
-
   return pages;
 }
 
+/**
+ * Get an array of all possible page paths, to be used with getStaticPaths().
+ *
+ * @returns array of all possible page paths
+ */
 export async function allPagePaths(): Promise<string[]> {
-  const pages = await allPages();
-  return pages.map((page) => page.__metadata.urlPath);
+  return allPageFilePaths().map((filePath) => buildPageUrlPath(filePath));
 }
 
+/**
+ * Given a current urlPath, process the appropriate content source file as a
+ * page.
+ *
+ * @param urlPath path to the current path
+ * @returns Page object
+ */
 export async function pageByUrlPath(urlPath: string): Promise<Page> {
-  const pages = await allPages();
-  return pages.find((page) => page.__metadata.urlPath === urlPath);
+  // Build an object when the keys are paths relative to the content source and
+  // the values are the original full file paths.
+  const pagePathMap = Object.fromEntries(
+    allPageFilePaths().map((filePath) => [buildPageUrlPath(filePath), filePath])
+  );
+  const page = await processPage(pagePathMap[urlPath]);
+  return page;
 }
