@@ -10,7 +10,7 @@ The content files are generated randomly at the beginning of test runs, and all 
 
 The content within each site is nearly identical. There is a home page that lists every content item in the site, and individual pages for each item, totalling 1,001 pages.
 
-Each subject is tested twice — first after deleting all relevant cache directories (cold), and then a second time with the build artifacts in place (warm).
+Each subject is tested twice — first after deleting all relevant cache directories (cold), and then a second time with the build artifacts in place (warm). Before the warm build runs, we add an extra page to the content directory. This page is similar in structure and is always the same. It is used to simulate a slight change in content without removing the cache.
 
 ## 📋 Project List
 
