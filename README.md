@@ -24,7 +24,7 @@ This is the current list of subjects:
 
 The tests are run as a GitHub action. Results are logged in the output of the workflow on GitHub.
 
-## Latest results (see [action run](https://github.com/contentlayerdev/contentlayer-benchmarks/runs/5486022846?check_suite_focus=true#step:5:274))
+## 🥇 Latest results (see [action run](https://github.com/contentlayerdev/contentlayer-benchmarks/runs/5486022846?check_suite_focus=true#step:5:274))
 
 ```
 ┌────────────────────────┬────────────┬────────────┐
