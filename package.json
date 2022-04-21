@@ -3,6 +3,7 @@
   "name": "contentlayer-benchmark-gatsby-docs",
   "workspaces": [
     "gatsby",
+    "gatsby-test",
     "next-contentlayer",
     "next-remark",
     "scripts/*"
