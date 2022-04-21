@@ -22,8 +22,8 @@ const PageLayout = ({ data }: PageProps<ContextProps>) => {
 };
 
 export const query = graphql`
-  query ($title: String) {
-    markdownRemark(frontmatter: { title: { eq: $title } }) {
+  query ($id: String) {
+    markdownRemark(id: { eq: $id }) {
       frontmatter {
         title
       }

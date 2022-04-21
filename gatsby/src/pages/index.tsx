@@ -17,11 +17,7 @@ const IndexPage = ({ data }: PageProps<DataProps>) => {
   return (
     <div>
       {pages.map((page) => (
-        <a
-          style={{ display: "block" }}
-          key={page.fields.url}
-          href={page.fields.url}
-        >
+        <a style={{ display: "block" }} key={page.url} href={page.url}>
           {page.frontmatter.title}
         </a>
       ))}
@@ -36,9 +32,7 @@ export const query = graphql`
         frontmatter {
           title
         }
-        fields {
-          url
-        }
+        url: gatsbyPath(filePath: "/{MarkdownRemark.frontmatter__title}")
       }
     }
   }

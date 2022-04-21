@@ -5,7 +5,5 @@ export type PageFrontmatter = {
 export type Page = {
   frontmatter: PageFrontmatter;
   html: string;
-  fields: {
-    url: string;
-  };
+  url: string;
 };
