@@ -25,10 +25,5 @@ export function testsConfig(rootDir: string): TestConfig {
       path: path.join(rootDir, "gatsby"),
       cache: [".cache", "public"],
     },
-    {
-      name: "Gatsby Test",
-      path: path.join(rootDir, "gatsby-test"),
-      cache: [".cache", "public"],
-    },
   ];
 }
