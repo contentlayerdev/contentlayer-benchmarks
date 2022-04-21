@@ -6,3 +6,5 @@ node_modules
 
 # Generated markdown files
 content/*.md
+
+.DS_Store
