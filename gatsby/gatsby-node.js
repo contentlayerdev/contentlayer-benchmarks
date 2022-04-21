@@ -1,4 +1,4 @@
-export const createSchemaCustomization = ({ actions }) => {
+exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
     type MarkdownRemark implements Node @dontInfer {
       frontmatter: Frontmatter

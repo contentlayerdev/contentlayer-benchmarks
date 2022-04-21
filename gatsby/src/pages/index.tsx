@@ -13,6 +13,7 @@ type DataProps = {
 
 const IndexPage = ({ data }: PageProps<DataProps>) => {
   const pages = data.allMarkdownRemark.nodes;
+  console.log(pages);
 
   return (
     <div>
