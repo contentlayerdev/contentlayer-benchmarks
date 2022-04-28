@@ -24,16 +24,24 @@ This is the current list of subjects:
 
 The tests are run as a GitHub action. Results are logged in the output of the workflow on GitHub.
 
-## 🥇 Latest results (see [action run](https://github.com/contentlayerdev/contentlayer-benchmarks/runs/5771443391?check_suite_focus=true#step:5:274))
+### Running Locally
+
+To run the project locally, install the dependencies using Yarn:
+
+    yarn install
+
+There is a shell script that handles running the tests: `bin/run.sh`. You can run this directly and the results will be printed to your console.
+
+## 🥇 Latest results (see [action run](https://github.com/contentlayerdev/contentlayer-benchmarks/runs/6215848133?check_suite_focus=true#step:5:274))
 
 ```
 ┌────────────────────────┬────────────┬────────────┐
 │                        │ Cold (sec) │ Warm (sec) │
 ├────────────────────────┼────────────┼────────────┤
-│ Next.js + Contentlayer │ 25.73      │ 16.29      │
+│ Next.js + Contentlayer │ 28.72      │ 18.93      │
 ├────────────────────────┼────────────┼────────────┤
-│ Next.js + Remark       │ 44.48      │ 39.27      │
+│ Next.js + Remark       │ 45.47      │ 39.00      │
 ├────────────────────────┼────────────┼────────────┤
-│ Gatsby                 │ 46.59      │ 25.73      │
+│ Gatsby                 │ 40.08      │ 16.74      │
 └────────────────────────┴────────────┴────────────┘
 ```
