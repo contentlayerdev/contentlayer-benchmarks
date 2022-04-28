@@ -77,5 +77,7 @@ for (const test of config.tests) {
 let table = new Table({
   head: ["", "Cold (sec)", "Warm (sec)"],
 });
-output.map((row) => table.push([row.name, row.cold, row.warm]));
+output.map((row) =>
+  table.push([row.name, row.cold.toFixed(2), row.warm.toFixed(2)])
+);
 console.log(table.toString());
