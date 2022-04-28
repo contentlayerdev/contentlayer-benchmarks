@@ -12,7 +12,7 @@ const contentDir = path.join(rootDir, "content");
 const warmFilename = "warm-file.md";
 const warmFileSrc = path.join(process.cwd(), warmFilename);
 const warmFileDest = path.join(contentDir, warmFilename);
-const tests: TestConfig = testsConfig(rootDir);
+const config: TestConfig = testsConfig(rootDir);
 
 type TestOutputItem = {
   name: string;
@@ -29,7 +29,11 @@ function msToS(ms: number): number {
   return Math.round(s * 100) / 100;
 }
 
-function runTest(config: TestConfigItem) {
+function getAverage(results: TestOutputItem[], key: "cold" | "warm"): number {
+  return results.reduce((prev, curr) => prev + curr[key], 0) / results.length;
+}
+
+function runTest(config: TestConfigItem): TestOutputItem {
   // Delete cache items.
   for (const cacheItem of config.cache) {
     execSync(`cd ${config.path} && rm -rf ${cacheItem}`);
@@ -46,18 +50,28 @@ function runTest(config: TestConfigItem) {
   const w0 = performance.now();
   execSync(`cd ${config.path} && npm run build`, { stdio: "inherit" });
   const w1 = performance.now();
-  // Record results
-  output.push({
+  // Delete warm file
+  fs.unlinkSync(warmFileDest);
+  // Return results
+  const results = {
     name: config.name,
     cold: msToS(c1 - c0),
     warm: msToS(w1 - w0),
-  });
-  // Delete warm file
-  fs.unlinkSync(warmFileDest);
+  };
+  console.log(results);
+  return results;
 }
 
 // Run the tests
-for (const test of tests) runTest(test);
+for (const test of config.tests) {
+  const results = [...Array(config.runs)].map((_) => runTest(test));
+  // Report the average of the cold and warm builds.
+  output.push({
+    name: test.name,
+    cold: getAverage(results, "cold"),
+    warm: getAverage(results, "warm"),
+  });
+}
 
 // Log output
 let table = new Table({
