@@ -42,7 +42,7 @@ This is the current list of subjects:
 
 - Next.js (v12.1.0) + Contentlayer (v0.1.2)
 - Next.js (v12.1.0) + Remark (v13.0.0)
-- Gatsby (v4.9.2) + gatsby-transformer-remark (v5.9.0)
+- Gatsby (v4.13.0) + gatsby-transformer-remark (v5.13.0)
 
 ## 🏎 Test Runner
 
