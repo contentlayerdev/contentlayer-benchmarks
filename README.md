@@ -56,16 +56,16 @@ To run the project locally, install the dependencies using Yarn:
 
 There is a shell script that handles running the tests: `bin/run.sh`. You can run this directly and the results will be printed to your console.
 
-## 🥇 Latest results (see [action run](https://github.com/contentlayerdev/contentlayer-benchmarks/runs/6215848133?check_suite_focus=true#step:5:274))
+## 🥇 Latest results (see [action run](https://github.com/contentlayerdev/contentlayer-benchmarks/runs/6216779230?check_suite_focus=true#step:5:274))
 
 ```
 ┌────────────────────────┬────────────┬────────────┐
 │                        │ Cold (sec) │ Warm (sec) │
 ├────────────────────────┼────────────┼────────────┤
-│ Next.js + Contentlayer │ 28.72      │ 18.93      │
+│ Next.js + Contentlayer │ 23.52      │ 15.56      │
 ├────────────────────────┼────────────┼────────────┤
-│ Next.js + Remark       │ 45.47      │ 39.00      │
+│ Next.js + Remark       │ 38.10      │ 32.80      │
 ├────────────────────────┼────────────┼────────────┤
-│ Gatsby                 │ 40.08      │ 16.74      │
+│ Gatsby                 │ 32.31      │ 15.00      │
 └────────────────────────┴────────────┴────────────┘
 ```

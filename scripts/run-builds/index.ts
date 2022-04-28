@@ -58,7 +58,7 @@ function runTest(config: TestConfigItem): TestOutputItem {
     cold: msToS(c1 - c0),
     warm: msToS(w1 - w0),
   };
-  console.log(results);
+  console.log("Individual run completed:", results);
   return results;
 }
 
