@@ -5,4 +5,5 @@ export type PageFrontmatter = {
 export type Page = {
   frontmatter: PageFrontmatter;
   html: string;
+  url: string;
 };

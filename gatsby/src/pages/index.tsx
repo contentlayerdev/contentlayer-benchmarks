@@ -3,24 +3,21 @@ import { graphql, PageProps } from "gatsby";
 
 import type { Page } from "../types/Page";
 
-type RemarkNode = { node: Page };
+type RemarkNode = Page;
 
 type DataProps = {
   allMarkdownRemark: {
-    edges: RemarkNode[];
+    nodes: RemarkNode[];
   };
 };
 
 const IndexPage = ({ data }: PageProps<DataProps>) => {
-  const pages = data.allMarkdownRemark.edges.map((_: any) => _.node);
+  const pages = data.allMarkdownRemark.nodes;
 
   return (
     <div>
       {pages.map((page) => (
-        <a
-          style={{ display: "block" }}
-          key={page.fields.url}
-          href={page.fields.url}>
+        <a style={{ display: "block" }} key={page.url} href={page.url}>
           {page.frontmatter.title}
         </a>
       ))}
@@ -31,15 +28,11 @@ const IndexPage = ({ data }: PageProps<DataProps>) => {
 export const query = graphql`
   {
     allMarkdownRemark {
-      edges {
-        node {
-          frontmatter {
-            title
-          }
-          fields {
-            url
-          }
+      nodes {
+        frontmatter {
+          title
         }
+        url: gatsbyPath(filePath: "/{MarkdownRemark.frontmatter__title}")
       }
     }
   }
